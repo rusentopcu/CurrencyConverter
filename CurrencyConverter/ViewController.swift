@@ -42,11 +42,24 @@ class ViewController: UIViewController {
             }
             else {
                 if data != nil {
+                    //MARK: - Response & Data
+                    
+                    
+                    do {
+                        let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        
+                        DispatchQueue.main.async {
+                            print(jsonresponse)
+                        }
+                    } catch {
+                        print("error")
+                    }
                     
                 }
             }
+            
         }
-        
+        task.resume()
     }
     
 }
