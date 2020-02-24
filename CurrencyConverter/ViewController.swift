@@ -46,10 +46,37 @@ class ViewController: UIViewController {
                     
                     
                     do {
-                        let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String,Any>
                         
                         DispatchQueue.main.async {
-                            print(jsonresponse)
+                            //MARK: - Parsing & JSONSerialization
+                            if let rates = jsonresponse["rates"] as? [String: Any] {
+                                print(rates)
+                                
+                                if let cad = rates["CAD"] as? Double {
+                                    self.cadLabel.text = "CAD: \(cad)"
+                                }
+                                
+                                if let chf = rates["CHF"] as? Double {
+                                    self.chfLabel.text = "CHF: \(chf)"
+                                }
+                                
+                                if let gbp = rates["GBP"] as? Double {
+                                    self.gbpLabel.text = "GBP: \(gbp)"
+                                }
+                                
+                                if let jpy = rates["JPY"] as? Double {
+                                    self.jpyLabel.text = "JPY: \(jpy)"
+                                }
+                                
+                                if let usd = rates["USD"] as? Double {
+                                    self.usdLabel.text = "USD: \(usd)"
+                                }
+                                if let turkish = rates["TRY"] as? Double {
+                                    self.tryLabel.text = "TRY: \(turkish)"
+                                }
+                            }
+                            
                         }
                     } catch {
                         print("error")
